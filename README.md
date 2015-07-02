@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Dotfiles for VIM/Conky/etc.
 
 ## F.A.Q.
@@ -39,27 +38,3 @@ mv ~/vim/.vimrc ~/
 
 6) Restart VIM and get fun ;)
 
-## How to install Sublime Text settings
-
-1) Copy my settings for Sublime Text 3 into settings folder (but firstly don't forget make backup for old preferences):
-```bash
-git clone https://github.com/Relrin/dotfiles.git ~/Downloads/
-# for example, Mac OS X using ~/Library/Application Support/Sublime Text 3/Packages/ folder
-cd ~/Downloads/
-cp -r ~/Downloads/dotfiles/sublime/Packages/* ~/Library/Application Support/Sublime Text 3/Packages/
-```
-
-2) Get list packages from [requirements.txt](https://raw.githubusercontent.com/Relrin/dotfiles/master/sublime/requirements.txt) and install via [PackageControl](https://packagecontrol.io/)
-
-3) Restart Sublime Text 3 and get fun ;)
-
-## Screenshots
-
-VIM:
-  ![alt text](https://raw.githubusercontent.com/Relrin/dotfiles/master/screenshots/vim.png)
-Sublime Text 3:
-  ![alt text](https://raw.githubusercontent.com/Relrin/dotfiles/master/screenshots/sublime.png)
-=======
-# my-dot-conf
-My dot-conf files
->>>>>>> fcdb111233eacd3ffa874785b84038365ba6c8b4
