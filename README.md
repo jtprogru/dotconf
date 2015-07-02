@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dotfiles for VIM/Conky/etc.
 
 ## F.A.Q.
@@ -58,3 +59,7 @@ VIM:
   ![alt text](https://raw.githubusercontent.com/Relrin/dotfiles/master/screenshots/vim.png)
 Sublime Text 3:
   ![alt text](https://raw.githubusercontent.com/Relrin/dotfiles/master/screenshots/sublime.png)
+=======
+# my-dot-conf
+My dot-conf files
+>>>>>>> fcdb111233eacd3ffa874785b84038365ba6c8b4
