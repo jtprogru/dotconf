@@ -86,9 +86,9 @@ if has("gui_running")
 endif
 set ttyfast
 
-colorscheme nightly
-"set guifont=Consolas:h13
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
+colorscheme molokai
+set guifont=Consolas:h13
+"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
 
 " Enable Syntax Colors
 " in GUI mode we go with fruity and Monaco 13
