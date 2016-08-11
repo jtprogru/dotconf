@@ -26,8 +26,8 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 4) Clone my repository somewhere and copy settings:
 ```bash
-git clone https://github.com/Relrin/dotfiles.git ~/Downloads/
-cp -t ~/Downloads/dotfiles/vim/* ~/.vim/
+git clone https://github.com/jtprog/my-dot-conf.git ~/Downloads/
+cp -t ~/Downloads/my-dot-conf/vim/* ~/.vim/
 mv ~/vim/.vimrc ~/
 ```
 
@@ -37,4 +37,3 @@ mv ~/vim/.vimrc ~/
 ```
 
 6) Restart VIM and get fun ;)
-

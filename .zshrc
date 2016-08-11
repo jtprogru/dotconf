@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/jtprog_ru/.oh-my-zsh
+export ZSH=/Users/jtprog/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -49,11 +49,11 @@ HIST_STAMPS="mm.dd.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git pip python ubuntu django virtualenv zsh-syntax-highlighting)
+plugins=(git pip python ubuntu django docker virtualenv zsh-syntax-highlighting brew)
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/Users/jtprog/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -72,7 +72,7 @@ export LANG=ru_RU.UTF-8
 export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -92,6 +92,9 @@ git_prompt() {
 }
 setopt prompt_subst
 export RPROMPT='[$(git_prompt)%~]'
+
+#Export GoPath
+export PATH=$PATH:/usr/local/go/bin
 
 setopt menucomplete
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate
@@ -146,7 +149,5 @@ setopt extendedglob
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 
-alias sysupgrade='/home/jtprog_ru/bin/script/upgrade.sh'
+alias sysupgrade='sudo softwareupdate -irv'
 alias rs="sudo djrs"
-
-
