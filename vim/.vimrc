@@ -12,7 +12,8 @@ Plugin 'Shougo/unite.vim'               " Navigation between buffers and files
 Plugin 'majutsushi/tagbar'              " Class/module browser
 
 "------------------=== Other ===----------------------
-Plugin 'bling/vim-airline'              " lean & mean status/tabline for vim that's light as air
+Plugin 'vim-airline/vim-airline'        " lean & mean status/tabline for vim that's light as air
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'fisadev/FixedTaskList.vim'      " Pending tasks list
 Plugin 'rosenfeld/conque-term'          " Consoles as buffers
 Plugin 'tpope/vim-surround'             " Parentheses, brackets, quotes, XML tags, and more
@@ -126,6 +127,9 @@ set scrolloff=3         " keep some more lines for scope
 set showmatch           " show matching brackets/parenthesis
 set matchtime=0         " don't blink when matching
 
+" Spell cheking
+set spell spelllang=ru,en
+
 " Swaps and backups
 if has("win32") || has("win64")
     set dir=$TMP
@@ -142,7 +146,7 @@ endif
 
 " Tab Settings
 set smarttab
-set tabstop=4
+set tabstop=2
 
 " Highlight characters past column 120
 augroup vimrc_autocmds
@@ -306,9 +310,9 @@ autocmd FileType python map <buffer> <leader>8 :PymodeLint<CR>
 " Languages support
 "=====================================================
 " --- C/C++/C# ---
-autocmd FileType c setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
-autocmd FileType cpp setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
-autocmd FileType cs setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd FileType c setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd FileType cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd FileType cs setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd FileType c setlocal commentstring=/*\ %s\ */
 autocmd FileType cpp,cs setlocal commentstring=//\ %s
 let c_no_curly_error=1
@@ -322,7 +326,7 @@ autocmd FileType clj setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 " --- CSS ---
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType css setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType css setlocal commentstring=/*\ %s\ */
 
 " --- Erlang ---
@@ -348,10 +352,10 @@ let python_highlight_exceptions=0
 let python_highlight_builtins=0
 let python_slow_sync=1
 autocmd FileType python setlocal completeopt-=preview
-autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4
+autocmd FileType python setlocal expandtab shiftwidth=2 tabstop=2
 \ formatoptions+=croq softtabstop=4 smartindent
 \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-autocmd FileType pyrex setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+autocmd FileType pyrex setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 let g:syntastic_python_checkers = ['flake8', 'python']
 let g:syntastic_python_flake8_args='--ignore=E121,E128,E711,E301,E261,E241,E124,E126,E721
 \ --max-line-length=80'
@@ -365,7 +369,7 @@ let g:syntastic_python_flake8_args='--ignore=E121,E128,E711,E301,E261,E241,E124,
 "autocmd FileType rust setlocal commentstring=//\ %s
 
 " --- Vim ---
-autocmd FileType vim setlocal expandtab shiftwidth=2 tabstop=4 softtabstop=2
+autocmd FileType vim setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
 " --- template language support (SGML / XML too) ---
 autocmd FileType xml,html,htmljinja,htmldjango setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
