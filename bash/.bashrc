@@ -101,9 +101,9 @@ fi
 # FOR GO LANGUAGE settings
 #This line will tell the Go installer where to place the source code before compilation
 export GOROOT=$HOME/GoSource
-#With this line, you choose the architecture of your machine.  
-#Those with 64 bit CPUs should enter "amd64" here.  
-export GOARCH=386
+#With this line, you choose the architecture of your machine.
+#Those with 64 bit CPUs should enter "amd64" here.
+export GOARCH=amd64
 #Your operating system
 export GOOS=linux
 #And now the location where the installer will place the finished files

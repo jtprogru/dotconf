@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/jtprog/.oh-my-zsh
+export ZSH=/home/jtprog/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -49,11 +49,11 @@ HIST_STAMPS="mm.dd.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git pip python ubuntu django docker virtualenv zsh-syntax-highlighting brew)
+plugins=(git pip python ubuntu django docker virtualenv zsh-syntax-highlighting)
 
 # User configuration
 
-export PATH="/Users/jtprog/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/home/jtprog/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -72,7 +72,7 @@ export LANG=ru_RU.UTF-8
 export ARCHFLAGS="-arch x86_64"
 
 # ssh
-export SSH_KEY_PATH="~/.ssh/id_rsa"
+export SSH_KEY_PATH="~/.ssh"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -149,5 +149,4 @@ setopt extendedglob
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 
-alias sysupgrade='sudo softwareupdate -irv'
-alias rs="sudo djrs"
+alias sysupgrade='sudo /home/jtprog/bin/upgrade.sh'

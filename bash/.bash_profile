@@ -4,7 +4,7 @@ if [ -f /usr/local/etc/bash_completion ]; then
 fi
 
 # set default editors
-export EDITOR=mvim
+export EDITOR=vim
 export GIT_EDITOR=vim
 
 # set custom prompt
@@ -26,7 +26,7 @@ RELRIN_VC_PROMPT_EX="$RELRIN_VC_PROMPT%m%u"
 mitsuhikos_vcprompt() {
   path=`pwd`
   prompt="$RELRIN_VC_PROMPT"
-  if [[ "$path" != /Users/relrin/code/* ]]; then
+  if [[ "$path" != /Users/jtprog/workspace/* ]]; then
     prompt="$RELRIN_VC_PROMPT_EX"
   fi
   vcprompt -f "$prompt"
