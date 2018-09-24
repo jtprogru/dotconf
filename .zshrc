@@ -1,10 +1,12 @@
-# Path to your oh-my-zsh installation.
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation
 export ZSH=/Users/jtprog/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -18,7 +20,7 @@ ZSH_THEME="robbyrussell"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=7
+export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -40,7 +42,7 @@ ENABLE_CORRECTION="true"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="mm.dd.yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -49,17 +51,16 @@ HIST_STAMPS="mm.dd.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git pip python ubuntu django docker virtualenv zsh-syntax-highlighting brew)
-
-# User configuration
-
-export PATH="/Users/jtprog/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-# export MANPATH="/usr/local/man:$MANPATH"
+plugins=(git bundle docker brew vim docker-compose emoji github nmap osx pip3 python3 screen sudo themes xcode fasd)
 
 source $ZSH/oh-my-zsh.sh
 
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
 # You may need to manually set your language environment
-export LANG=ru_RU.UTF-8
+# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -69,10 +70,10 @@ export LANG=ru_RU.UTF-8
 # fi
 
 # Compilation flags
-export ARCHFLAGS="-arch x86_64"
+# export ARCHFLAGS="-arch x86_64"
 
 # ssh
-export SSH_KEY_PATH="~/.ssh/id_rsa"
+export SSH_KEY_PATH="~/.ssh"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -80,12 +81,21 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="vim ~/.zshrc"
+alias ohmyzsh="vim ~/.oh-my-zsh"
+alias weather="curl -H 'Accept-Language: ru' wttr.in/Moscow"
+alias myip="curl ipecho.net/plain; echo;"
+alias mc="mc -S modarcon16"
+alias duh="du -d 1 -h"
+alias ll="ls -lah"
+#alias cdi='cd `ls | peco`'
+#alias rmd='rm -rf'
+alias excuse='/Users/jtprog/workplace/python/twitter-excuse/run.sh'
+alias getpwd='openssl rand -base64 12'
+alias worklog='echo `date "+%Y-%m-%d% : $1"` >> /Users/jtprog/workplace/companies/regioncom/work.log'
 
-export PROMPT='%n@%m-> '
+export PROMPT='%n@%m> '
 export RPROMPT='[%~]'
-
 git_prompt() {
   temp=`git symbolic-ref HEAD 2>/dev/null | cut -d / -f 3`
   if [ "$temp" != "" ]; then echo "$temp:"; fi
@@ -93,61 +103,66 @@ git_prompt() {
 setopt prompt_subst
 export RPROMPT='[$(git_prompt)%~]'
 
-#Export GoPath
-export PATH=$PATH:/usr/local/go/bin
-
 setopt menucomplete
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate
 
-setopt correctall
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+#export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="/usr/local/sbin:$PATH"
+PHP_AUTOCONF="/usr/local/bin/autoconf"
 
-compress () {
-  if [ $1 ] ; then
-    case $1 in
-      tbz)  tar cjvf $2.tar.bz2 $2   ;;
-      tgz)  tar czvf $2.tar.gz  $2   ;;
-      tar)  tar cpvf $2.tar  $2      ;;
-      bz2)  bzip $2                  ;;
-      gz)   gzip -c -9 -n $2 > $2.gz ;;
-      zip)  zip -r $2.zip $2         ;;
-      7z)   7z a $2.7z $2            ;;
-      *)    echo "'$1' cannot be packed via >compress<" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
-}
-
+# Распаковка архивов
+# example: extract file
 extract () {
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2) tar xvjf $1   ;;
-      *.tar.gz)  tar xvzf $1   ;;
-      *.tar.xz)  tar xvfJ $1   ;;
-      *.bz2)     bunzip2 $1    ;;
-      *.rar)     unrar x $1    ;;
-      *.gz)      gunzip $1     ;;
-      *.tar)     tar xvf $1    ;;
-      *.tbz2)    tar xvjf $1   ;;
-      *.tgz)     tar xvzf $1   ;;
-      *.zip)     unzip $1      ;;
-      *.Z)       uncompress $1 ;;
-      *.7z)      7z x $1       ;;
-      *)         echo "'$1' cannot be extracted via >extract<" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
+ if [ -f $1 ] ; then
+ case $1 in
+ *.tar.bz2)   tar xjf $1        ;;
+ *.tar.gz)    tar xzf $1     ;;
+ *.bz2)       bunzip2 $1       ;;
+ *.rar)       unrar x $1     ;;
+ *.gz)        gunzip $1     ;;
+ *.tar)       tar xf $1        ;;
+ *.tbz2)      tar xjf $1      ;;
+ *.tbz)       tar -xjvf $1    ;;
+ *.tgz)       tar xzf $1       ;;
+ *.zip)       unzip $1     ;;
+ *.Z)         uncompress $1  ;;
+ *.7z)        7z x $1    ;;
+ *)           echo "I don't know how to extract '$1'..." ;;
+ esac
+ else
+ echo "'$1' is not a valid file"
+ fi
 }
 
-command_not_found_handler() {
-  /usr/lib/command-not-found $1
+# Запаковать архив
+# example: pk tar file
+pack () {
+ if [ $1 ] ; then
+ case $1 in
+ tbz)       tar cjvf $2.tar.bz2 $2      ;;
+ tgz)       tar czvf $2.tar.gz  $2       ;;
+ tar)      tar cpvf $2.tar  $2       ;;
+ bz2)    bzip $2 ;;
+ gz)        gzip -c -9 -n $2 > $2.gz ;;
+ zip)       zip -r $2.zip $2   ;;
+ 7z)        7z a $2.7z $2    ;;
+ *)         echo "'$1' cannot be packed via pk()" ;;
+ esac
+ else
+ echo "'$1' is not a valid file"
+ fi
+
 }
 
-setopt autocd
-setopt extendedglob
-setopt hist_ignore_all_dups
-setopt hist_ignore_space
+# Дополнительные функции
+#
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+#export PATH="/usr/local/opt/qt/bin:$PATH"
+export PATH="/usr/local/opt/gnu-getopt/bin:/usr/local/opt/qt/bin:$PATH"
 
-alias sysupgrade='sudo softwareupdate -irv'
-alias rs="sudo djrs"
+PATH=${PATH:+:${PATH}}; export PATH;
+
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/sqlite/lib"
+export CPPFLAGS="-I/usr/local/opt/sqlite/include"

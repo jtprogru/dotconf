@@ -2,18 +2,22 @@
 " Vundle settings
 "=====================================================
 " set the runtime path to include Vundle and initialize
+set nocompatible              " be iMproved, required
+filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'              " let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 "---------=== Code/project navigation ===-------------
 Plugin 'scrooloose/nerdtree'            " A tree explorer plugin for vim
 Plugin 'Shougo/unite.vim'               " Navigation between buffers and files
 Plugin 'majutsushi/tagbar'              " Class/module browser
+Plugin 'Yggdroot/indentLine'            " indentLine
+Plugin 'junegunn/vim-easy-align'        " vim-easy-align
 
 "------------------=== Other ===----------------------
-Plugin 'vim-airline/vim-airline'        " lean & mean status/tabline for vim that's light as air
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline'        " lean & mean status/tabline for vim that's light as air
 Plugin 'fisadev/FixedTaskList.vim'      " Pending tasks list
 Plugin 'rosenfeld/conque-term'          " Consoles as buffers
 Plugin 'tpope/vim-surround'             " Parentheses, brackets, quotes, XML tags, and more
@@ -29,36 +33,19 @@ Plugin 'scrooloose/syntastic'           " Syntax checking plugin for Vim
 Plugin 'tpope/vim-commentary'           " Comment stuff out
 Plugin 'mitsuhiko/vim-sparkup'          " Sparkup (XML/jinja/htlm-django/etc.) support
 
-" --- Clojure ---
-Plugin 'tpope/vim-fireplace'            " Clojure completion
-Plugin 'guns/vim-clojure-highlight'     " Highlighting code
-Plugin 'guns/vim-clojure-static'        " Highlighting for static types
-
-" --- Erlang ---
-Plugin 'jimenezrick/vimerl'             " The Erlang plugin for Vim
-
-" --- CSS ---
-Plugin 'JulesWang/css.vim'              " CSS syntax file
-Plugin 'groenewege/vim-less'            " Vim syntax for LESS (dynamic CSS)
-
-" --- JavaScript ---
-Plugin 'pangloss/vim-javascript'        " Vastly improved Javascript indentation and syntax support in Vim
-
 " --- HTML ---
-Plugin 'othree/html5.vim'               " HTML5 omnicomplete and sytnax
 Plugin 'idanarye/breeze.vim'            " Html navigation like vim-easymotion, tag matching, tag highlighting and DOM navigation
 
 " --- Python ---
-Plugin 'davidhalter/jedi-vim'           " Awesome Python autocompletion with VIM
-Plugin 'klen/python-mode'               " Vim python-mode. PyLint, Rope, Pydoc, breakpoints from box
-Plugin 'mitsuhiko/vim-jinja'            " Jinja support for vim
-Plugin 'mitsuhiko/vim-python-combined'  " Combined Python 2/3 for Vim
+"Plugin 'davidhalter/jedi-vim'           " Awesome Python autocompletion with VIM
+"Plugin 'python-mode/python-mode'               " Vim python-mode. PyLint, Rope, Pydoc, breakpoints from box
 Plugin 'hynek/vim-python-pep8-indent'   " PEP8 indent
-Plugin 'jmcantrell/vim-virtualenv'      " Virtualenv support in VIM
 
-" --- Rust ---
-Plugin 'rust-lang/rust.vim'             " Vim support for Rust file detection and syntax highlighting
-Plugin 'timonv/vim-cargo'               " Simple vim command bindings to quickly run cargo stuff from vim
+
+Plugin 'tpope/vim-fugitive'
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'git://git.wincent.com/command-t.git'
+
 
 call vundle#end() " required
 filetype on
@@ -68,6 +55,12 @@ filetype plugin indent on
 "=====================================================
 " General settings
 "=====================================================
+let g:airline#extensions#tabline#enabled = 1
+let g:indentLine_char = '│'
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=1
 
 set backspace=indent,eol,start
 " This must happen before the syntax system is enabled
@@ -75,6 +68,11 @@ aunmenu Help.
 aunmenu Window.
 let no_buffers_menu=1
 set mousemodel=popup
+
+" Set default tab2space
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 " Activate a permanent ruler and add line highlightng as well as numbers.
 " Also disable the sucking pydoc preview window for the omni completion
@@ -87,9 +85,13 @@ if has("gui_running")
 endif
 set ttyfast
 
-colorscheme molokai
-set guifont=Consolas:h13
-"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
+colorscheme solarized
+" Выбираем темный вариант solarized. Как ты понял, есть еще светлый
+set background=dark
+" Укажем явно количество цветов
+let g:solarized_termcolors = 256
+
+set guifont=Monaco:h13
 
 " Enable Syntax Colors
 " in GUI mode we go with fruity and Monaco 13
@@ -128,16 +130,12 @@ set showmatch           " show matching brackets/parenthesis
 set matchtime=0         " don't blink when matching
 
 " Spell cheking
-set spell spelllang=ru,en
+" set spell spelllang=ru,en
 
 " Swaps and backups
-if has("win32") || has("win64")
-    set dir=$TMP
-    set backupdir=$TMP
-else
-    set dir=/tmp
-    set backupdir=/tmp
-endif
+set dir=/tmp
+set backupdir=/tmp
+
 
 " Hide some panels
 "set guioptions-=m  " remove menu bar
@@ -146,7 +144,7 @@ endif
 
 " Tab Settings
 set smarttab
-set tabstop=2
+set tabstop=4
 
 " Highlight characters past column 120
 augroup vimrc_autocmds
@@ -161,6 +159,7 @@ let g:snippets_dir = "~/.vim/vim-snippets/snippets"
 
 "NERDTree
 map <F1> :NERDTreeToggle<CR>    " browse the list of files in the current directory
+let NERDTreeShowHidden=1
 
 " Unite settings
 nnoremap <F2> :Unite buffer<CR> " browse a list of the currently opened buffers
@@ -178,11 +177,6 @@ nnoremap <F6> :exe "ConqueTermSplit ipython " . expand("%")<CR> " and debug-mode
 let g:ConqueTerm_StartMessages = 0
 let g:ConqueTerm_CloseOnEnd = 0
 
-" Jedi-vim
-let g:jedi#show_call_signatures = 1 " Show call signatures
-let g:jedi#popup_on_dot = 1         " Enable autocomplete on dot
-let g:jedi#popup_select_first = 0   " Disable first select from auto-complete
-
 " Syntastic
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -196,10 +190,6 @@ let g:syntastic_error_symbol = 'X'
 let g:syntastic_style_error_symbol = 'X'
 let g:syntastic_warning_symbol = 'x'
 let g:syntastic_style_warning_symbol = 'x'
-
-" Vim-Airline
-let g:airline_theme='powerlineish'
-let g:airline_powerline_fonts = 1
 
 "=====================================================
 " Python-mode settings
@@ -321,16 +311,10 @@ let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_c_include_dirs = ['include', '../include']
 let g:syntastic_c_compiler = 'clang'
 
-" --- Clojure ---
-autocmd FileType clj setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-
 " --- CSS ---
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType css setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType css setlocal commentstring=/*\ %s\ */
-
-" --- Erlang ---
-autocmd Filetype erlang setlocal omnifunc=erlang_complete#Complete
 
 " --- JavaScript ---
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
@@ -360,14 +344,6 @@ let g:syntastic_python_checkers = ['flake8', 'python']
 let g:syntastic_python_flake8_args='--ignore=E121,E128,E711,E301,E261,E241,E124,E126,E721
 \ --max-line-length=80'
 
-" --- Rust ---
-"set hidden
-"let $RUST_SRC_PATH = "/Users/savicvalera/rust/src"
-"let g:racer_cmd = "/Users/savicvalera/racer/target/release/racer"
-"autocmd BufRead,BufNewFile *.rs set filetype=rust
-"autocmd FileType rust setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
-"autocmd FileType rust setlocal commentstring=//\ %s
-
 " --- Vim ---
 autocmd FileType vim setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
@@ -378,6 +354,12 @@ autocmd FileType html,htmljinja,htmldjango imap <buffer> <c-l> <Plug>SparkupNext
 autocmd FileType htmljinja setlocal commentstring={#\ %s\ #}
 let html_no_rendering=1
 let g:syntastic_html_checkers = []
+
+" --- Ledger support configuration ---
+let g:ledger_maxwidth = 80
+let g:ledger_fillstring = '    -'
+let g:ledger_detailed_first = 1
+let g:ledger_fold_blanks = 0
 
 "=====================================================
 " User functions
@@ -395,3 +377,4 @@ if 1:
     vim.current.window.cursor = (cpos[0], cpos[1] + len(s))
 endpython
 endfunction
+

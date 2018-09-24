@@ -1,4 +1,4 @@
-# Dotfiles for VIM/Conky/etc.
+# Dotfiles for VIM/Conky/ZSH/Bash
 
 ## F.A.Q.
 
