@@ -1,39 +1,15 @@
-# Dotfiles for VIM/Conky/ZSH/Bash
+# my-dot-conf
 
-## F.A.Q.
+My personal dotconf files:
 
-Q: What i can find there?  
-A: You can find there my settings for VIM/conky/etc. programms
-
-Q: Can i steal this?  
-A: Of course, you can use this easily
-
-## How to install my VIM settings
-
-1) Installing VIM lastest version (skip this step, if already installed):
-```bash
-sudo add-apt-repository ppa:fcwu-tw/ppa
-sudo apt-get update
-sudo apt-get install vim
-```
-
-2) Install [powerline-fonts](https://github.com/Lokaltog/powerline-fonts) for vim-airline
-
-3) Install Vundle plugin
-```bash
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-```
-
-4) Clone my repository somewhere and copy settings:
-```bash
-git clone https://github.com/jtprog/my-dot-conf.git ~/Downloads/
-cp -t ~/Downloads/my-dot-conf/vim/* ~/.vim/
-mv ~/vim/.vimrc ~/
-```
-
-5) Run VIM and enter:
-```bash
-:PluginInstall
-```
-
-6) Restart VIM and get fun ;)
+- `.deployer_completion` - completion for [deployer](https://deployer.org);
+- `.flake8` - global config for [Flake8](https://flake8.pycqa.org/en/latest/);
+- `.gitconfig` - global config for Git;
+- `.gitignore_global` - global gitignore file;
+- `.lynxrc` - global config for [Lynx](https://invisible-island.net/lynx/);
+- `.p10k.zsh` - config for ZSH theme [Powerlevel10k](https://github.com/romkatv/powerlevel10k);
+- `.tmux.conf` - from [.tmux.git](https://github.com/gpakosz/.tmux.git);
+- `.tmux.conf.local` - from [.tmux.git](https://github.com/gpakosz/.tmux.git);
+- `.vimrc` - config for [VIM](https://www.vim.org);
+- `.zsh_aliases` - my personal ZSH aliases;
+- `.zshrc` - config for [ZSH](https://www.zsh.org) with [OMZ](https://ohmyz.sh);

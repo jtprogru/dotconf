@@ -1,107 +1,43 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME:/usr/local/bin:$PATH
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-# Path to your oh-my-zsh installation
+##########  MAIN  ##########
+source $HOME/.env
+export PATH=$HOME:/usr/local/bin:/opt/metasploit-framework/bin:$PATH
 export ZSH=/Users/jtprog/.oh-my-zsh
-
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
+export WPDIR=/Users/jtprog/workplace
+export WPDIRPY=/Users/jtprog/workplace/python
+export MYLOGDIR=/Users/jtprog/workplace/logs
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
+export ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_password
+export MONO_GAC_PREFIX="/usr/local"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bundle docker brew vim docker-compose emoji github nmap osx pip3 python3 screen sudo themes xcode fasd)
+plugins=(git docker brew docker-compose emoji osx python themes xcode ansible colored-man-pages iterm2 nmap tmuxinator)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='vim'
+else
+    export EDITOR='vim'
+fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
+export ARCHFLAGS="-arch x86_64"
 # ssh
 export SSH_KEY_PATH="~/.ssh"
+# All alias moved to ~/.zsh_aliases
+source ~/.zsh_aliases
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-alias zshconfig="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-alias weather="curl -H 'Accept-Language: ru' wttr.in/Moscow"
-alias myip="curl ipecho.net/plain; echo;"
-alias mc="mc -S modarcon16"
-alias duh="du -d 1 -h"
-alias ll="ls -lah"
-#alias cdi='cd `ls | peco`'
-#alias rmd='rm -rf'
-alias excuse='/Users/jtprog/workplace/python/twitter-excuse/run.sh'
-alias getpwd='openssl rand -base64 12'
-alias worklog='echo `date "+%Y-%m-%d% : $1"` >> /Users/jtprog/workplace/companies/regioncom/work.log'
-
-export PROMPT='%n@%m> '
-export RPROMPT='[%~]'
-git_prompt() {
-  temp=`git symbolic-ref HEAD 2>/dev/null | cut -d / -f 3`
-  if [ "$temp" != "" ]; then echo "$temp:"; fi
-}
-setopt prompt_subst
-export RPROMPT='[$(git_prompt)%~]'
 
 setopt menucomplete
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate
@@ -111,9 +47,9 @@ zstyle ':completion:*' menu select=1 _complete _ignored _approximate
 export PATH="/usr/local/sbin:$PATH"
 PHP_AUTOCONF="/usr/local/bin/autoconf"
 
-# Распаковка архивов
-# example: extract file
-extract () {
+########## Function for packing and unpacking archive
+##### Example: unpack file.ext
+unpack () {
  if [ -f $1 ] ; then
  case $1 in
  *.tar.bz2)   tar xjf $1        ;;
@@ -134,16 +70,14 @@ extract () {
  echo "'$1' is not a valid file"
  fi
 }
-
-# Запаковать архив
-# example: pk tar file
+##### Example: pack ext file/dir
 pack () {
  if [ $1 ] ; then
  case $1 in
  tbz)       tar cjvf $2.tar.bz2 $2      ;;
  tgz)       tar czvf $2.tar.gz  $2       ;;
- tar)      tar cpvf $2.tar  $2       ;;
- bz2)    bzip $2 ;;
+ tar)       tar cpvf $2.tar  $2       ;;
+ bz2)       bzip $2 ;;
  gz)        gzip -c -9 -n $2 > $2.gz ;;
  zip)       zip -r $2.zip $2   ;;
  7z)        7z a $2.7z $2    ;;
@@ -154,15 +88,85 @@ pack () {
  fi
 
 }
-
+########### Tab-autocomplete for ssh connections
+h=()
+if [[ -r ~/.ssh/config ]]; then
+  h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+fi
+if [[ -r ~/.ssh/known_hosts ]]; then
+  h=($h ${${${(f)"$(cat ~/.ssh/known_hosts{,2} || true)"}%%\ *}%%,*}) 2>/dev/null
+fi
+if [[ $#h -gt 0 ]]; then
+  zstyle ':completion:*:ssh:*' hosts $h
+  zstyle ':completion:*:slogin:*' hosts $h
+fi
 # Дополнительные функции
-#
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-#export PATH="/usr/local/opt/qt/bin:$PATH"
-export PATH="/usr/local/opt/gnu-getopt/bin:/usr/local/opt/qt/bin:$PATH"
-
+export PATH="/usr/local/opt/gnu-getopt/bin:/usr/local/opt/sqlite/bin:$PATH"
+export EDITOR="/usr/bin/vim"
+export MAILPATH="~/.config/mutt/mail"
+export GOPATH="/Users/jtprog/workplace/golang"
+export PATH="$PATH:/usr/local/go/bin:/Users/jtprog/workplace/golang/bin:/usr/local/opt/ruby/bin:/usr/local/opt/curl/bin"
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export KUBECONFIG=$HOME/.kube/config
 PATH=${PATH:+:${PATH}}; export PATH;
 
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/sqlite/lib"
-export CPPFLAGS="-I/usr/local/opt/sqlite/include"
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+# pip zsh completion start
+function _pip_completion {
+  local words cword
+  read -Ac words
+  read -cn cword
+  reply=( $( COMP_WORDS="$words[*]" \
+             COMP_CWORD=$(( cword-1 )) \
+             PIP_AUTO_COMPLETE=1 $words[1] ) )
+}
+compctl -K _pip_completion pip3
+# pip zsh completion end
+
+HOMEBREW_FOLDER="/usr/local/share"
+source "$HOMEBREW_FOLDER/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$HOMEBREW_FOLDER/zsh-autosuggestions/zsh-autosuggestions.zsh"
+export PATH="/usr/local/opt/nss/bin:$PATH"
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+#For compilers to find openssl@1.1 you may need to set:
+export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+export NGROK_TOKEN="1R2x6iULPMDmohIOmKBiRUty7vM_3Cfi9asoymfnKPc2UChbu"
+# The next line updates PATH for Yandex Cloud CLI.
+#if [ -f '/Users/jtprog/.yandex-cloud/path.bash.inc' ]; then source '/Users/jtprog/.yandex-cloud/path.bash.inc'; fi
+
+# added by travis gem
+[ -f /Users/jtprog/.travis/travis.sh ] && source /Users/jtprog/.travis/travis.sh
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/ncurses/bin:$PATH"
+export PATH="/Users/jtprog/workplace/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/ncurses/lib"
+export CPPFLAGS="-I/usr/local/opt/ncurses/include"
+export PKG_CONFIG_PATH="/usr/local/opt/ncurses/lib/pkgconfig"
+
+#. $(multiwerf use 1.0 stable --as-file)
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+#source ~/.deployer_completion
+
+export PATH="$HOME/.poetry/bin:/usr/local/opt/python@3.8/bin:$PATH"
+#For compilers to find python@3.7 you may need to set:
+export LDFLAGS="-L/usr/local/opt/python@3.8/lib"
+# For pkg-config to find python@3.7 you may need to set:
+export PKG_CONFIG_PATH="/usr/local/opt/python@3.8/lib/pkgconfig"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export PATH="/usr/local/opt/libressl/bin:$PATH"
+
+export LC_CTYPE=ru_RU.UTF-8
+export LANG=ru_RU.UTF-8
+#export LC_ALL=ru_RU.UTF-8
+export LC_ALL='en_US.UTF-8'
+
+DEFAULT_USER="jtprog"
+
