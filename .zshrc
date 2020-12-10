@@ -134,7 +134,6 @@ export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 #For compilers to find openssl@1.1 you may need to set:
 export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
-export NGROK_TOKEN="1R2x6iULPMDmohIOmKBiRUty7vM_3Cfi9asoymfnKPc2UChbu"
 # The next line updates PATH for Yandex Cloud CLI.
 #if [ -f '/Users/jtprog/.yandex-cloud/path.bash.inc' ]; then source '/Users/jtprog/.yandex-cloud/path.bash.inc'; fi
 
