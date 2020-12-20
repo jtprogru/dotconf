@@ -1,0 +1,43 @@
+"
+"
+call plug#begin('~/.vim/plugged')
+
+Plug 'gertjanreynaert/cobalt2-vim-theme'
+Plug 'preservim/nerdtree'
+"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'flrnd/candid.vim'
+Plug 'https://github.com/ycm-core/YouCompleteMe.git'
+Plug 'vim-syntastic/syntastic'
+Plug 'nvie/vim-flake8'
+Plug 'jiangmiao/auto-pairs'
+Plug 'ryanoasis/vim-devicons'
+Plug 'chr4/nginx.vim'
+Plug 'wakatime/vim-wakatime'
+
+call plug#end()
+
+syntax on
+filetype plugin on
+filetype plugin indent on
+colorscheme cobalt2
+
+set number
+set expandtab
+set tabstop=4
+set enc=utf-8
+set guicursor=n-v-c:block-Cursor
+set hlsearch
+set incsearch
+let python_highlight_all=1
+set shell=/usr/local/bin/zsh
+set background=dark
+set termguicolors
+set guicursor=n-v-c:block-Cursor
+set backspace=indent,eol,start
+set ruler
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+

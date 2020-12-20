@@ -1,0 +1,32 @@
+# My personal aliases
+# ~/.aliases
+
+# Basic aliases from zshrc
+alias weather="curl -H 'Accept-Language: ru' wttr.in/Moscow"
+alias duh="du -d 1 -h"
+alias ls="ls -G"
+alias ll="ls -lah"
+alias cls="clear"
+alias tb="nc termbin.com 9999"
+alias pylint='pylint --output-format=colorized'
+alias gs='git status'
+alias ga='git add'
+alias gg='git grog'
+alias grep='grep --color'
+alias egrep='egrep --color'
+alias ..='cd ..'
+
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+alias screenls='screen -list'
+alias myip="curl wtfismyip.com/json"
+alias dig='dig +noquestion +multiline +nocmd +nocomments +nostats'
+alias dc="docker-compose"
+alias dclog="docker-compose logs -f --tail=20"
+alias dcup="docker-compose up -d"
+alias dcconf="docker-compose config"
+alias dccs="docker-compose config --services"
+alias dcps="docker-compose ps"
+alias dstats='docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.MemPerc}}\t{{.BlockIO}}\t{{.NetIO}}"'
+
+alias gl="git log --pretty=format:'%h%x09%an%x09%ad%x09%s'"
