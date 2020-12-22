@@ -1,0 +1,5 @@
+export HISTTIMEFORMAT="%d/%m/%y %T "
+source ~/.bashrc
+
+if [ -z "$STY" ]; then screen -R; fi
+

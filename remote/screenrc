@@ -1,0 +1,35 @@
+# Save this in ~/.screenrc
+
+# Use bash
+shell /bin/bash
+
+autodetach on
+
+# Big scrollback
+defscrollback 500000
+
+# No annoying startup message
+startup_message off
+
+# Display the status line at the bottom
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.kW}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} %H %{..Y} %Y/%m/%d %c"
+
+# Setup screens
+# chdir /home/vagrant/Sites # All screens start in ~/Sites folder
+screen -t 'server' 0 bash # Make first screen for running server
+screen -t 'logs' 1 bash # Make screen for running tests
+screen -t 'workspace' 2 bash # Make screen for general work i.e. running git commands
+
+# Switch to the workspace screen
+select 2
+
+# termcapinfo xterm ti@:te@
+termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007:ti@:te@'
+# From http://www4.informatik.uni-erlangen.de/~jnweiger/screen-faq.html
+# Q: My xterm scrollbar does not work with screen.
+# A: The problem is that xterm will not allow scrolling if the alternate text buffer is selected.
+# The standard definitions of the termcap initialize capabilities ti and te switch to and 
+# from the alternate text buffer. (The scrollbar also does not work when you start e.g. ‘vi’). 
+# You can tell screen not to use these initialisations by adding the line “termcapinfo xterm ti@:te@” to your ~/.screenrc file.
