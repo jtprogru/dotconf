@@ -1,35 +1,53 @@
 "
 "
+set nocompatible
+filetype off
+
 call plug#begin('~/.vim/plugged')
 
-Plug 'gertjanreynaert/cobalt2-vim-theme'
 Plug 'preservim/nerdtree'
-"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'flrnd/candid.vim'
-Plug 'https://github.com/ycm-core/YouCompleteMe.git'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-syntastic/syntastic'
 Plug 'nvie/vim-flake8'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ryanoasis/vim-devicons'
-Plug 'chr4/nginx.vim'
 Plug 'wakatime/vim-wakatime'
+Plug 'flazz/vim-colorschemes'
+Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
 syntax on
 filetype plugin on
 filetype plugin indent on
-colorscheme cobalt2
+colorscheme onedark
 
 set number
 set expandtab
 set tabstop=4
-set enc=utf-8
+set autoindent
+set shiftwidth=4
+set showmatch
 set guicursor=n-v-c:block-Cursor
 set hlsearch
 set incsearch
 let python_highlight_all=1
+
+let g:airline_powerline_fonts = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+highlight Normal ctermbg=None
+highlight LineNr ctermfg=DarkGrey
+
 set shell=/usr/local/bin/zsh
+set rtp+=/usr/local/opt/fzf
+
+set lazyredraw            " improve scrolling performance when navigating through large results
+
 set background=dark
 set termguicolors
 set guicursor=n-v-c:block-Cursor
@@ -40,4 +58,26 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
+" Перед сохранением вырезаем пробелы на концах (только в .py файлах)
+autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
+" В .py файлах включаем умные отступы после ключевых слов
+autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+
+set mouse=a " Включить поддержку мыши
+set termencoding=utf-8 " Кодировка терминала
+set encoding=utf-8 " Кодировка файлов по умолчанию
+set novisualbell " Не мигать
+set t_vb= " Не пищать
+
+" Вырубаем .swp и ~ (резервные) файлы
+set nobackup
+set noswapfile
+
+set showcmd " always show bottom line for command menu
+set wildmenu " visual autocomplete for command menu
+set lazyredraw " redraw only when we need to — for faster macros
+
+set redrawtime=10000
+set mmp=5000
 
